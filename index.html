@@ -517,7 +517,6 @@
         #results-section.active { opacity: 1; pointer-events: auto; }
 
         /* --- FIXED MOBILE RESPONSIVENESS --- */
-        /* --- FIXED MOBILE RESPONSIVENESS --- */
         @media (max-width: 850px) {
             .header h1 { 
                 font-size: 1.75rem;
@@ -578,7 +577,20 @@
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
         }
+
+        /* --- MODAL MOBILE & SCROLL FIXES --- */
+        #aboutModal {
+            overscroll-behavior: contain; 
+            -webkit-overflow-scrolling: touch; 
+        }
         
+        @media (max-width: 850px) {
+            #aboutModal > div {
+                padding: 24px 20px !important; 
+                max-height: 90vh !important; 
+                border-radius: 20px !important;
+            }
+        }
         
     </style>
 </head>
@@ -820,12 +832,12 @@
         // --- MODAL LOGIC ---
         function openAbout() {
             const modal = document.getElementById('aboutModal');
-            const modalBox = modal.children[0]; // Targets the inner white card
+            const modalBox = modal.children[0]; 
             
             modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Prevents background scrolling
+            document.body.style.overflow = 'hidden'; 
+            document.documentElement.style.overflow = 'hidden'; // NEW: Locks mobile background
             
-            // Reset opacity and trigger the opening bounce animation
             modal.style.opacity = "1";
             modalBox.style.opacity = "1";
             modalBox.style.transform = "translateY(0)";
@@ -834,9 +846,8 @@
 
         function closeAbout() {
             const modal = document.getElementById('aboutModal');
-            const modalBox = modal.children[0]; // Targets the inner white card
+            const modalBox = modal.children[0]; 
 
-            // 1. Trigger the smooth fade out and slide down
             modal.style.transition = "opacity 0.3s ease";
             modal.style.opacity = "0";
             
@@ -844,12 +855,11 @@
             modalBox.style.transform = "translateY(20px)";
             modalBox.style.opacity = "0";
 
-            // 2. Wait 300ms for the fade to finish BEFORE hiding it completely
             setTimeout(() => {
                 modal.style.display = 'none';
-                document.body.style.overflow = 'auto'; // Restores scrolling
+                document.body.style.overflow = ''; // Clears the lock
+                document.documentElement.style.overflow = ''; // NEW: Clears the mobile lock
                 
-                // Clean up transitions so it opens perfectly next time
                 modal.style.transition = "";
                 modalBox.style.transition = "";
                 modalBox.style.animation = ""; 
