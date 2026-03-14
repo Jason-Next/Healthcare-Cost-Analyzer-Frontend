@@ -1,4 +1,4 @@
-# 🏥 Healthcare Cost Exposure Analyzer & AI Coach
+# 🏥 Healthcare Cost Exposure Analyzer
 
 An intelligent machine learning application that predicts annual medical costs and simulates lifestyle improvements to discover a **Path to Savings**. 
 
