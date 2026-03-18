@@ -1278,9 +1278,15 @@
                 const adviceContainer = document.getElementById('ai-advice-container');
                 adviceContainer.innerHTML = ""; 
 
+                // Get the user's exact tobacco choice to make the icon dynamic
+                const userTobaccoChoice = document.getElementById('smoking').value;
+                let dynamicTobaccoIcon = "🚭"; // Default to no smoking
+                if (userTobaccoChoice === "chewing") dynamicTobaccoIcon = "🦷";
+                if (userTobaccoChoice === "both") dynamicTobaccoIcon = "⚠️";
+
                 // Map backend types to emojis
                 const icons = {
-                    "tobacco": "🚭",
+                    "tobacco": dynamicTobaccoIcon, // Use the dynamic icon!
                     "alcohol": "🍷",
                     "activity": "🏃‍♂️",
                     "optimized": "🌟"
